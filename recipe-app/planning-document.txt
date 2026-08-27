@@ -1,0 +1,40 @@
+Recipe Discovery & Meal Planning App - Planning Document
+
+1. Component Hierarchy Diagram
+App (Router & Global State)
+├── common: Navbar, Footer
+└── Pages
+    ├── Home (AudioPlayer)
+    ├── RecipesPage (SearchBar, RecipeFilter)
+    │   └── RecipeList 
+    │       └── RecipeCard (Card, Button)
+    ├── RecipeDetail (VideoPlayer, Modal, Loading)
+    ├── MealPlannerPage 
+    │   └── MealPlanner 
+    │       └── DayCard (Card, Button)
+    ├── FavoritesPage (RecipeList -> RecipeCard)
+    └── NotFound (EmptyState)
+
+2. Data & Props Flow Diagram
+[App] (State: recipes, favorites, mealPlan)
+  │
+  ├───(Props: recipes[])───> [RecipesPage] ──> [RecipeList] 
+  │                             └──(Props: recipe{}, onFavoriteToggle fn)──> [RecipeCard]
+  │
+  ├───(Props: mealPlan{}, onAddMeal fn)───> [MealPlannerPage] ──> [MealPlanner]
+  │                                            └──(Props: day, meals{})──> [DayCard]
+  │
+  └───(Props: favorites[])───> [Navbar] (Displays favorite count)
+
+3. Component List & Purposes
+* App / Pages: App serves as the root router. Route-level components (Home, RecipesPage, MealPlannerPage, FavoritesPage, RecipeDetail, NotFound) isolate specific views.
+* Navbar / Footer: Manages global navigation and active route highlighting.
+* UI Components: Button, Card, SearchBar, Modal, Loading, and EmptyState act as highly reusable, presentation-only elements utilizing the children prop for a consistent design system.
+* Recipe Elements: RecipeList, RecipeCard, and RecipeFilter map arrays of data and handle category/cuisine sorting.
+* Planner Elements: MealPlanner and DayCard construct the 7-day layout and individual breakfast, lunch, and dinner slots.
+* Media Elements: VideoPlayer and AudioPlayer provide HTML5 multimedia wrapping.
+
+4. State Management Strategy
+Global state (recipes, favorites, mealPlan) is lifted to App.jsx using useState to prevent prop drilling. The useEffect hook triggers side-effects, instantly synchronizing favorites and 
+mealPlan mutations with localStorage for browser persistence. Sibling communication (e.g., adding a favorite in RecipeCard updating the count in Navbar) is executed entirely through App.jsx callbacks. 
+Local UI state (searchTerm, isLoading) remains tightly scoped within child components to prevent unnecessary app-wide re-renders.

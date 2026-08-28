@@ -1,4 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Navbar from './components/Navigation/Navbar';
+import Footer from './components/common/Footer';
 import Home from './pages/Home';
 import RecipesPage from './pages/RecipesPage';
 import MealPlannerPage from './pages/MealPlannerPage';
@@ -10,7 +12,7 @@ import './App.css';
 function App() {
   return (
     <BrowserRouter>
-      {/* <Navbar /> */}
+      <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/recipes" element={<RecipesPage />} />
@@ -19,7 +21,7 @@ function App() {
         <Route path="/favorites" element={<FavoritesPage />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
-      {/* <Footer /> */}
+      <Footer />
     </BrowserRouter>
   );
 }

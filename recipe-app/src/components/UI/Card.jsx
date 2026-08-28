@@ -1,16 +1,12 @@
 import PropTypes from 'prop-types';
+import styles from './Card.module.css';
 
 const Card = ({ children, customStyle }) => {
-  const cardStyle = {
-    backgroundColor: 'white',
-    borderRadius: 'var(--border-radius)',
-    boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
-    padding: '1.5rem',
-    margin: '1rem',
-    ...customStyle
-  };
-
-  return <div style={cardStyle}>{children}</div>;
+  return (
+    <div className={styles.card} style={customStyle}>
+      {children}
+    </div>
+  );
 };
 
 Card.propTypes = {

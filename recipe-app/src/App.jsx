@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { FavoritesProvider } from './context/FavoritesContext';
 import Navbar from './components/Navigation/Navbar';
 import Footer from './components/common/Footer';
 import Home from './pages/Home';
@@ -11,22 +12,24 @@ import './App.css';
 
 function App() {
   return (
-    <BrowserRouter>
-      <div className="app-wrapper">
-        <Navbar />
-        <main className="main-content">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/recipes" element={<RecipesPage />} />
-            <Route path="/recipes/:id" element={<RecipeDetail />} />
-            <Route path="/meal-planner" element={<MealPlannerPage />} />
-            <Route path="/favorites" element={<FavoritesPage />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </main>
-        <Footer />
-      </div>
-    </BrowserRouter>
+    <FavoritesProvider>
+      <BrowserRouter>
+        <div className="app-wrapper">
+          <Navbar />
+          <main className="main-content">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/recipes" element={<RecipesPage />} />
+              <Route path="/recipes/:id" element={<RecipeDetail />} />
+              <Route path="/meal-planner" element={<MealPlannerPage />} />
+              <Route path="/favorites" element={<FavoritesPage />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </main>
+          <Footer />
+        </div>
+      </BrowserRouter>
+    </FavoritesProvider>
   );
 }
 

@@ -1,10 +1,16 @@
+import { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import { FavoritesContext } from '../../context/FavoritesContext';
 import Card from '../UI/Card';
 import Button from '../UI/Button';
 import styles from './RecipeCard.module.css';
 
 const RecipeCard = ({ recipe }) => {
+  const { favorites, toggleFavorite } = useContext(FavoritesContext);
+  
+  const isFavorited = favorites.some((fav) => fav.id === recipe.id);
+
   const cardStyles = {
     padding: 0,
     overflow: 'hidden',
@@ -24,9 +30,14 @@ const RecipeCard = ({ recipe }) => {
         
         <div className={styles.actions}>
           <Link to={`/recipes/${recipe.id}`}>
-            <Button variant="primary">View Recipe</Button>
+            <Button variant="primary">View</Button>
           </Link>
-          <Button variant="secondary">❤️ Save</Button>
+          <Button 
+            variant={isFavorited ? 'danger' : 'secondary'} 
+            onClick={() => toggleFavorite(recipe)}
+          >
+            {isFavorited ? 'Unsave' : '❤️ Save'}
+          </Button>
         </div>
       </div>
     </Card>

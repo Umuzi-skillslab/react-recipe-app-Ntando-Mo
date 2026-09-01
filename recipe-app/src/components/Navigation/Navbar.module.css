@@ -8,6 +8,7 @@
   position: sticky;
   top: 0;
   z-index: 100;
+  border-bottom: 4px solid var(--secondary-gold);
 }
 
 .logo a {
@@ -17,21 +18,50 @@
   font-weight: bold;
 }
 
+.navLinks {
+  display: flex;
+  align-items: center;
+}
+
 .navLinks a {
   color: white;
   text-decoration: none;
   margin-left: 1.5rem;
   transition: color 0.3s;
+  position: relative;
+  /* Added a bit more padding so the text doesn't touch the line */
+  padding-bottom: 6px; 
+}
+
+/* The invisible slider line */
+.navLinks a::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 3px; /* Thickened the slider line slightly */
+  bottom: 0;
+  left: 0;
+  background-color: var(--secondary-gold);
+  transition: width 0.3s ease-in-out;
 }
 
 .navLinks a:hover {
   color: var(--secondary-gold);
 }
 
-.active {
+/* Animate the line to 100% width on hover */
+.navLinks a:hover::after {
+  width: 100%;
+}
+
+/* Active link state keeps the gold text */
+.navLinks a.active {
   color: var(--secondary-gold) !important;
   font-weight: bold;
-  border-bottom: 2px solid var(--secondary-gold);
+}
+
+.navLinks a.active::after {
+  width: 100%;
 }
 
 .hamburger {

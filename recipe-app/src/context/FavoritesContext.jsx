@@ -1,10 +1,19 @@
-import { createContext, useState } from 'react';
+import { createContext, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 export const FavoritesContext = createContext();
 
 export const FavoritesProvider = ({ children }) => {
-  const [favorites, setFavorites] = useState([]);
+  // Check localStorage fist when the app loads
+  const [favorites, setFavorites] = useState(() => {
+    const savedFavorites = localStorage.getItem('recipeFavorites');
+    return savedFavorites ? JSON.parse(savedFavorites) : [];
+  });
+
+  // Watch the 'favorites' array. If it changes, update localStorage
+  useEffect(() => {
+    localStorage.setItem('recipeFavorites', JSON.stringify(favorites));
+  }, [favorites]);
 
   const toggleFavorite = (recipe) => {
     setFavorites((prevFavorites) => {

@@ -9,7 +9,7 @@ const RecipeDetail = () => {
   const navigate = useNavigate();
 
   // Find the specific recipe in our dummy data array
-  const recipe = recipesData.find((r) => r.id === id);
+  const recipe = recipesData.find(r => r.id === parseInt(id, 10));
 
   // Handle the case where a user types an invalid ID in the URL
   if (!recipe) {

@@ -21,7 +21,13 @@ const RecipesPage = () => {
 
   // Filter recipes array dynamically based on all selected state conditions
   const filteredRecipes = recipesData.filter((recipe) => {
-    const matchesSearch = recipe.title.toLowerCase().includes(searchQuery.toLowerCase());
+    const lowerQuery = searchQuery.toLowerCase();
+    
+    // Checks if the keyword is in the title OR inside any of the ingredients
+    const matchesSearch = 
+      recipe.title.toLowerCase().includes(lowerQuery) ||
+      recipe.ingredients.some(ingredient => ingredient.toLowerCase().includes(lowerQuery));
+      
     const matchesCategory = category === 'all' || recipe.category === category;
     const matchesCuisine = cuisine === 'all' || recipe.cuisine === cuisine;
     const matchesDifficulty = difficulty === 'all' || recipe.difficulty === difficulty;

@@ -1,0 +1,105 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* Exact padding match from your portfolio */
+  padding: 30px 50px;
+  background-color: var(--primary-green);
+  color: white;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-bottom: 4px solid var(--secondary-gold);
+}
+
+.logo a {
+  color: white;
+  text-decoration: none;
+  /* Exact typography and spacing from your portfolio logo */
+  font-size: 1.8rem;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+.navLinks {
+  display: flex;
+  align-items: center;
+  /* Exact gap spacing between links from your portfolio */
+  gap: 35px;
+}
+
+.navLinks a {
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: color 0.3s ease;
+  position: relative;
+  padding-bottom: 1px;
+}
+
+/* The invisible slider line */
+.navLinks a::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 3px;
+  bottom: 0;
+  left: 0;
+  background-color: var(--secondary-gold);
+  transition: width 0.3s ease;
+}
+
+.navLinks a:hover {
+  color: var(--secondary-gold);
+}
+
+/* Animate the line to 100% width on hover */
+.navLinks a:hover::after {
+  width: 100%;
+}
+
+/* Active link state keeps the gold text */
+.navLinks a.active {
+  color: var(--secondary-gold) !important;
+}
+
+/* Forces the slider to stay open on the active page */
+.navLinks a.active::after {
+  width: 100%;
+}
+
+.hamburger {
+  display: none;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.8rem;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    padding: 20px 30px;
+  }
+  .hamburger {
+    display: block;
+  }
+  .navLinks {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: var(--primary-green);
+    padding: 1rem 0;
+    gap: 0;
+  }
+  .navLinks.open {
+    display: flex;
+  }
+  .navLinks a {
+    margin: 1rem 2rem;
+  }
+}

@@ -1,0 +1,75 @@
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  background-color: var(--white);
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+  overflow: hidden;
+}
+
+.heroImage {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+}
+
+.content {
+  padding: 40px;
+}
+
+.header {
+  margin-bottom: 30px;
+  border-bottom: 2px solid rgba(194, 168, 120, 0.2); /* Soft Gold with opacity */
+  padding-bottom: 20px;
+}
+
+.tag {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--secondary-gold);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.title {
+  font-size: 2.5rem;
+  color: var(--primary-green);
+  margin: 10px 0;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 40px;
+  margin-top: 30px;
+}
+
+.sectionTitle {
+  color: var(--primary-green);
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+}
+
+.ingredientsList {
+  list-style-type: square;
+  padding-left: 20px;
+  line-height: 2;
+}
+
+.videoContainer {
+  margin-top: 40px;
+  padding-top: 30px;
+  border-top: 2px solid rgba(194, 168, 120, 0.2);
+}
+
+.videoPlayer {
+  width: 100%;
+  border-radius: 8px;
+  box-shadow: 0 10px 20px rgba(31, 61, 43, 0.1);
+}
+
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}

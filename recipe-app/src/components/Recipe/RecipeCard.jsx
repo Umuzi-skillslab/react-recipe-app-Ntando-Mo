@@ -3,7 +3,12 @@ import PropTypes from 'prop-types';
 import Button from '../UI/Button';
 import Card from '../UI/Card';
 
-const RecipeCard = ({ recipe, onFavorite }) => {
+const RecipeCard = ({ recipe, onFavorite, isSaved }) => {
+  const handleSaveClick = (e) => {
+    e.preventDefault();
+    onFavorite();
+  };
+
   return (
     <Card>
       <img 
@@ -23,12 +28,14 @@ const RecipeCard = ({ recipe, onFavorite }) => {
         </p>
         
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          {/* This exact string interpolation fixes the routing bug */}
           <Link to={`/recipes/${recipe.id}`} style={{ textDecoration: 'none' }}>
             <Button variant="primary">View</Button>
           </Link>
           
-          <Button variant="secondary" onClick={() => onFavorite(recipe)}>
+          <Button 
+            variant={isSaved ? "danger" : "secondary"} 
+            onClick={handleSaveClick}
+          >
             ❤️ Save
           </Button>
         </div>
@@ -37,7 +44,6 @@ const RecipeCard = ({ recipe, onFavorite }) => {
   );
 };
 
-// Props Validation and Default Props
 RecipeCard.propTypes = {
   recipe: PropTypes.shape({
     id: PropTypes.number.isRequired,
@@ -46,11 +52,12 @@ RecipeCard.propTypes = {
     category: PropTypes.string,
     prepTime: PropTypes.string,
   }).isRequired,
-  onFavorite: PropTypes.func,
+  onFavorite: PropTypes.func.isRequired,
+  isSaved: PropTypes.bool,
 };
 
 RecipeCard.defaultProps = {
-  onFavorite: () => console.log('Favorite button clicked'),
+  isSaved: false,
 };
 
 export default RecipeCard;

@@ -11,7 +11,10 @@ const Navbar = () => {
   return (
     <nav className={styles.navbar}>
       <div className={styles.logo}>
-        <Link to="/">🍽️ RecipeHub</Link>
+        <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: '8px', textDecoration: 'none', color: 'inherit' }}>
+          <img src="/recipehub-logo.svg" alt="RecipeHub Logo" style={{ width: '32px', height: '32px' }} />
+          RecipeHub
+        </Link>
       </div>
       
       <button className={styles.hamburger} onClick={toggleMenu}>

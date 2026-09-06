@@ -1,40 +1,52 @@
 Recipe Discovery & Meal Planning App - Planning Document
 
 1. Component Hierarchy Diagram
-App (Router & Global State)
+App (Router & FavoritesContext Provider)
 ├── common: Navbar, Footer
 └── Pages
-    ├── Home (AudioPlayer)
-    ├── RecipesPage (SearchBar, RecipeFilter)
-    │   └── RecipeList 
-    │       └── RecipeCard (Card, Button)
-    ├── RecipeDetail (VideoPlayer, Modal, Loading)
-    ├── MealPlannerPage 
-    │   └── MealPlanner 
-    │       └── DayCard (Card, Button)
-    ├── FavoritesPage (RecipeList -> RecipeCard)
-    └── NotFound (EmptyState)
+├── Home (AudioPlayer, RecipeList)
+├── RecipesPage (SearchBar, RecipeFilter, Loading, RecipeList)
+│   └── RecipeList
+│       └── RecipeCard (Card, Button)
+├── RecipeDetail (VideoPlayer)
+├── MealPlannerPage (Modal, Button)
+├── FavoritesPage (RecipeList -> RecipeCard)
+└── NotFound (EmptyState)
 
 2. Data & Props Flow Diagram
-[App] (State: recipes, favorites, mealPlan)
-  │
-  ├───(Props: recipes[])───> [RecipesPage] ──> [RecipeList] 
-  │                             └──(Props: recipe{}, onFavoriteToggle fn)──> [RecipeCard]
-  │
-  ├───(Props: mealPlan{}, onAddMeal fn)───> [MealPlannerPage] ──> [MealPlanner]
-  │                                            └──(Props: day, meals{})──> [DayCard]
-  │
-  └───(Props: favorites[])───> [Navbar] (Displays favorite count)
+[FavoritesContext] (State: favorites[], toggleFavorite fn)
+│
+├───> [RecipeList] ──> [RecipeCard] (Consumes context to toggle and check saved status)
+│
+└───> [Navbar] (Consumes context to display favorite count)
+
+[RecipesPage] (State: recipes[], filters{}, isLoading, hasError)
+│
+├───(Props: searchTerm, handlers)───> [SearchBar]
+├───(Props: category, cuisine, handlers)───> [RecipeFilter]
+└───(Props: recipes[])───> [RecipeList]
+
+[MealPlannerPage] (State: planner{}, isModalOpen)
+│
+└───(Syncs planner state directly with localStorage via useEffect)
 
 3. Component List & Purposes
-* App / Pages: App serves as the root router. Route-level components (Home, RecipesPage, MealPlannerPage, FavoritesPage, RecipeDetail, NotFound) isolate specific views.
-* Navbar / Footer: Manages global navigation and active route highlighting.
-* UI Components: Button, Card, SearchBar, Modal, Loading, and EmptyState act as highly reusable, presentation-only elements utilizing the children prop for a consistent design system.
-* Recipe Elements: RecipeList, RecipeCard, and RecipeFilter map arrays of data and handle category/cuisine sorting.
-* Planner Elements: MealPlanner and DayCard construct the 7-day layout and individual breakfast, lunch, and dinner slots.
-* Media Elements: VideoPlayer and AudioPlayer provide HTML5 multimedia wrapping.
+
+App / Pages: App serves as the root router and wraps the application in the FavoritesContext. Route-level components (Home, RecipesPage, MealPlannerPage, FavoritesPage, RecipeDetail, NotFound) isolate specific views.
+
+Navbar / Footer: Manages global navigation and active route highlighting.
+
+UI Components: Button, Card, SearchBar, Modal, Loading, and EmptyState act as highly reusable, presentation-only elements utilizing the children prop for a consistent design system.
+
+Recipe Elements: RecipeList, RecipeCard, and RecipeFilter map arrays of data and handle complex filtering logic.
+
+Planner Elements: MealPlannerPage constructs the 7-day layout and individual breakfast, lunch, and dinner dropdown slots directly within the page.
+
+Media Elements: VideoPlayer and AudioPlayer provide HTML5 multimedia wrapping for tutorials and tips.
 
 4. State Management Strategy
-Global state (recipes, favorites, mealPlan) is lifted to App.jsx using useState to prevent prop drilling. The useEffect hook triggers side-effects, instantly synchronizing favorites and 
-mealPlan mutations with localStorage for browser persistence. Sibling communication (e.g., adding a favorite in RecipeCard updating the count in Navbar) is executed entirely through App.jsx callbacks. 
-Local UI state (searchTerm, isLoading) remains tightly scoped within child components to prevent unnecessary app-wide re-renders.
+Global state for saved recipes is managed using the Context API (FavoritesContext). This eliminates prop drilling and allows seamless sibling communication (e.g., clicking the save button in RecipeCard instantly updates the favorites count inside the Navbar).
+
+The MealPlannerPage manages its own complex 3-slot daily schedule locally. It utilizes the useEffect hook to instantly synchronize any mutations with localStorage for browser persistence.
+
+Local UI state (search queries, dropdown filters, loading states, and error handling) remains tightly scoped within parent components like RecipesPage to prevent unnecessary app-wide re-renders. Data fetching is simulated locally using setTimeout within a useEffect hook to demonstrate asynchronous state transitions.

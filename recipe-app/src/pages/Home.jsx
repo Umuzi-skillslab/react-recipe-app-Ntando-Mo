@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { recipesData } from '../data/recipesData';
 import Button from '../components/UI/Button';
 import RecipeList from '../components/Recipe/RecipeList';
+import AudioPlayer from '../components/Media/AudioPlayer';
 import styles from './Home.module.css';
 
 const Home = () => {
@@ -31,12 +32,19 @@ const Home = () => {
         className={styles.heroBanner}
       />
 
+      {/* Audio Player checks off the multimedia requirement */}
+      <section style={{ maxWidth: '1200px', margin: '40px auto 0', padding: '0 20px' }}>
+        <AudioPlayer 
+          title="Daily Cooking Tip: Perfecting Knife Skills" 
+          audioUrl="/assets/audio/cooking-tip.mp3" 
+        />
+      </section>
+
       <section>
         <div className={styles.sectionTitle}>
           <h2>Trending This Week</h2>
           <p>Our most popular dishes, hand-picked for you.</p>
         </div>
-        
         <RecipeList recipes={featuredRecipes} />
       </section>
     </div>

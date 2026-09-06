@@ -1,7 +1,7 @@
-import { useParams, useNavigate } from 'react-router-dom';
-import { recipesData } from '../../data/recipesData';
-import Button from '../UI/Button';
-import styles from './RecipeDetail.module.css';
+import { useParams, useNavigate } from "react-router-dom";
+import { recipesData } from "../../data/recipesData";
+import Button from "../UI/Button";
+import styles from "./RecipeDetail.module.css";
 
 const RecipeDetail = () => {
   // Grab the dynamic ID from the URL (/recipes/:id)
@@ -9,15 +9,17 @@ const RecipeDetail = () => {
   const navigate = useNavigate();
 
   // Find the specific recipe in our dummy data array
-  const recipe = recipesData.find(r => r.id === parseInt(id, 10));
+  const recipe = recipesData.find((r) => r.id === parseInt(id, 10));
 
   // Handle the case where a user types an invalid ID in the URL
   if (!recipe) {
     return (
-      <div style={{ textAlign: 'center', padding: '4rem' }}>
+      <div style={{ textAlign: "center", padding: "4rem" }}>
         <h2>Recipe Not Found</h2>
         <p>Sorry, we couldn't find the meal you were looking for.</p>
-        <Button variant="primary" onClick={() => navigate('/recipes')}>Back to Recipes</Button>
+        <Button variant="primary" onClick={() => navigate("/recipes")}>
+          Back to Recipes
+        </Button>
       </div>
     );
   }
@@ -25,14 +27,16 @@ const RecipeDetail = () => {
   return (
     <div className={styles.container}>
       <img src={recipe.image} alt={recipe.title} className={styles.heroImage} />
-      
+
       <div className={styles.content}>
         <Button variant="secondary" onClick={() => navigate(-1)}>
           &larr; Back
         </Button>
 
         <div className={styles.header}>
-          <span className={styles.tag}>{recipe.category} • {recipe.prepTime}</span>
+          <span className={styles.tag}>
+            {recipe.category} • {recipe.prepTime}
+          </span>
           <h1 className={styles.title}>{recipe.title}</h1>
           <p>{recipe.description}</p>
         </div>
@@ -49,10 +53,12 @@ const RecipeDetail = () => {
 
           <div>
             <h3 className={styles.sectionTitle}>Instructions</h3>
-            {/* Fix applied here: Mapping the instructions array into an ordered list */}
-            <ol style={{ lineHeight: '1.8', paddingLeft: '20px' }}>
+
+            <ol style={{ lineHeight: "1.8", paddingLeft: "20px" }}>
               {recipe.instructions.map((step, index) => (
-                <li key={index} style={{ paddingBottom: '10px' }}>{step}</li>
+                <li key={index} style={{ paddingBottom: "10px" }}>
+                  {step}
+                </li>
               ))}
             </ol>
           </div>
@@ -62,12 +68,14 @@ const RecipeDetail = () => {
         <div className={styles.videoContainer}>
           <h3 className={styles.sectionTitle}>Cooking Tutorial</h3>
           <video className={styles.videoPlayer} controls>
-            {/* Using a standard placeholder video for the capstone */}
-            <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4" />
+            {/* Using a standard placeholder video*/}
+            <source
+              src="/assets/videos/cooking-tutorial.mp4"
+              type="video/mp4"
+            />
             Your browser does not support HTML video.
           </video>
         </div>
-
       </div>
     </div>
   );

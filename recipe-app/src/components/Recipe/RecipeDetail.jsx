@@ -49,7 +49,12 @@ const RecipeDetail = () => {
 
           <div>
             <h3 className={styles.sectionTitle}>Instructions</h3>
-            <p style={{ lineHeight: '1.8' }}>{recipe.instructions}</p>
+            {/* Fix applied here: Mapping the instructions array into an ordered list */}
+            <ol style={{ lineHeight: '1.8', paddingLeft: '20px' }}>
+              {recipe.instructions.map((step, index) => (
+                <li key={index} style={{ paddingBottom: '10px' }}>{step}</li>
+              ))}
+            </ol>
           </div>
         </div>
 

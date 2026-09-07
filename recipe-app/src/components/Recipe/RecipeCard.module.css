@@ -61,9 +61,20 @@
 }
 .actions {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 12px;
+  gap: 10px;
+  margin-top: auto;
+  align-items: stretch;
+}
+.actions button {
+  white-space: nowrap;
+  min-width: 0;
+} /* Give the longer button slightly more room */
+.actions button:first-child {
+  flex: 1;
+}
+
+.actions button:last-child {
+  flex: 0 0 42%;
 }
 .viewLink {
   text-decoration: none;
@@ -106,20 +117,37 @@
   font-size: 1.05rem;
   line-height: 1;
 }
-@media (max-width: 500px) {
+/* Tablet: 768px–1024px */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .image {
+    height: 210px;
+  }
+  .content {
+    padding-top: 22px;
+  }
+  .actions {
+    gap: 8px;
+  }
+} /* Mobile: below 768px */
+@media (max-width: 767px) {
   .image {
     height: 200px;
   }
   .content {
-    padding: 20px;
+    padding-top: 20px;
   }
   .actions {
-    align-items: stretch;
     flex-direction: column;
+    align-items: stretch;
   }
   .viewLink,
   .btnSave,
   .btnSaved {
     width: 100%;
+  }
+} /* Desktop: above 1024px */
+@media (min-width: 1025px) {
+  .image {
+    height: 220px;
   }
 }

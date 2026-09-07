@@ -1,0 +1,20 @@
+.container {
+  width: 100%;
+  overflow: hidden;
+  border-radius: 12px;
+  background-color: #111;
+  box-shadow: 0 15px 35px rgba(31, 61, 43, 0.12);
+}
+
+.video {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background-color: #111;
+}
+
+@media (max-width: 600px) {
+  .container {
+    border-radius: 8px;
+  }
+}

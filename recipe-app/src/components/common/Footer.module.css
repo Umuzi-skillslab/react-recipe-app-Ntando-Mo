@@ -1,0 +1,129 @@
+/* 1. MOBILE FIRST (<768px) */
+.footer {
+  background-color: var(--primary-green);
+  color: var(--white, #ffffff);
+  padding: 50px 20px 25px;
+  margin-top: auto;
+  border-top: 4px solid var(--secondary-gold);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.topSection {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid rgba(194, 168, 120, 0.3); /* Soft gold opacity */
+}
+
+.brandCol {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: var(--white, #ffffff);
+  font-size: 1.8rem;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+.logoIcon {
+  width: 32px;
+  height: 32px;
+}
+
+.description {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.85);
+  max-width: 320px;
+  margin: 0;
+}
+
+.linkCol {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.colTitle {
+  color: var(--secondary-gold); 
+  font-size: 0.9rem;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.navLinks, .techList {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.navLinks a, .techList span {
+  color: rgba(255, 255, 255, 0.85);
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+}
+
+.navLinks a:hover {
+  color: var(--secondary-gold);
+  transform: translateX(4px);
+}
+
+.bottomSection {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-top: 25px;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.6);
+  text-align: center;
+}
+
+.bottomSection p {
+  margin: 0;
+}
+
+/* 2. TABLET (768px - 1024px) */
+@media (min-width: 768px) {
+  .topSection {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  .brandCol {
+    flex: 1 1 100%; 
+  }
+  .bottomSection {
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: left;
+  }
+}
+
+/* 3. DESKTOP (>1024px) */
+@media (min-width: 1024px) {
+  .topSection {
+    flex-wrap: nowrap;
+    gap: 80px;
+  }
+  .brandCol {
+    flex: 2; 
+  }
+  .linkCol {
+    flex: 1;
+  }
+}

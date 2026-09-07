@@ -60,7 +60,7 @@ const MealPlannerPage = () => {
         <h1>Weekly Meal Planner</h1>
         <p>Organize your cooking schedule for the week ahead.</p>
         
-        <div style={{ marginTop: '20px' }}>
+        <div className={styles.headerActions}>
           <Button variant="danger" onClick={() => setIsModalOpen(true)}>
             🗑️ Clear Entire Planner
           </Button>
@@ -77,8 +77,8 @@ const MealPlannerPage = () => {
               const assignedRecipe = recipesData.find((r) => r.id === assignedRecipeId);
 
               return (
-                <div key={slot} style={{ marginBottom: '1.5rem', paddingBottom: '1rem', borderBottom: '1px solid #eee' }}>
-                  <h4 style={{ textTransform: 'capitalize', color: '#1f3d2b', fontSize: '0.9rem', margin: '0 0 10px 0' }}>
+                <div key={slot} className={styles.mealSlot}>
+                  <h4 className={styles.slotTitle}>
                     {slot}
                   </h4>
 

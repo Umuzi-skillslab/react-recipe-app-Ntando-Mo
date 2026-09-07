@@ -1,26 +1,30 @@
-import PropTypes from 'prop-types';
-import Button from './Button';
+import PropTypes from "prop-types";
+import Button from "./Button";
+import styles from "./SearchBar.module.css";
 
-const SearchBar = ({ searchTerm, onSearchChange, onSearchSubmit }) => {
+const SearchBar = ({
+  searchTerm,
+  onSearchChange,
+  onSearchSubmit,
+}) => {
   return (
-    <form 
-      onSubmit={onSearchSubmit} 
-      style={{ display: 'flex', gap: '0.5rem', marginBottom: '1.5rem', maxWidth: '500px' }}
-    >
-      <input
-        type="text"
-        value={searchTerm}
-        onChange={onSearchChange}
-        placeholder="Search recipes by title or ingredient..."
-        style={{
-          padding: '0.5rem 1rem',
-          borderRadius: 'var(--border-radius)',
-          border: '1px solid #ccc',
-          flex: '1',
-          fontSize: '1rem'
-        }}
-      />
-      <Button type="submit" variant="primary">Search</Button>
+    <form className={styles.form} onSubmit={onSearchSubmit}>
+      <div className={styles.inputWrapper}>
+        <span className={styles.searchIcon}>⌕</span>
+
+        <input
+          type="text"
+          value={searchTerm}
+          onChange={onSearchChange}
+          placeholder="Search by recipe or ingredient..."
+          aria-label="Search recipes"
+          className={styles.input}
+        />
+      </div>
+
+      <Button type="submit" variant="primary">
+        Search
+      </Button>
     </form>
   );
 };
@@ -28,7 +32,7 @@ const SearchBar = ({ searchTerm, onSearchChange, onSearchSubmit }) => {
 SearchBar.propTypes = {
   searchTerm: PropTypes.string.isRequired,
   onSearchChange: PropTypes.func.isRequired,
-  onSearchSubmit: PropTypes.func.isRequired
+  onSearchSubmit: PropTypes.func.isRequired,
 };
 
 export default SearchBar;

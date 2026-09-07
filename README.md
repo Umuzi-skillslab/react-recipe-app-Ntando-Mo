@@ -8,7 +8,7 @@ The application also incorporates multimedia cooking content through reusable au
 
 ## Features
 
-### 🍽️ Recipe Discovery
+### Recipe Discovery
 
 * Browse a collection of recipes across breakfast, lunch, dinner, dessert, and snack categories.
 * View detailed recipe information including ingredients, instructions, category, cuisine, and difficulty.
@@ -18,7 +18,7 @@ The application also incorporates multimedia cooking content through reusable au
 * Display loading, error, and empty-result states.
 * Navigate to individual recipes using dynamic routes.
 
-### 📅 Weekly Meal Planner
+### Weekly Meal Planner
 
 * Plan meals from Monday to Sunday.
 * Each day includes dedicated breakfast, lunch, and dinner slots.
@@ -27,7 +27,7 @@ The application also incorporates multimedia cooking content through reusable au
 * Clear the complete meal plan.
 * Persist meal-planning data using `localStorage`.
 
-### ❤️ Favourites
+### Favourites
 
 * Save recipes as favourites.
 * Remove recipes from favourites.
@@ -36,14 +36,14 @@ The application also incorporates multimedia cooking content through reusable au
 * Persist favourites using `localStorage`.
 * Display the number of saved favourites in the navigation.
 
-### 🎧 Multimedia
+### Multimedia
 
 * Reusable HTML5 audio player for cooking tips.
 * Reusable HTML5 video player for cooking tutorials.
 * Native browser playback controls.
 * Fallback messaging when media cannot be played.
 
-### 📱 Responsive Design
+### Responsive Design
 
 * Responsive navigation with mobile menu behaviour.
 * Responsive recipe cards and layouts.
@@ -51,7 +51,7 @@ The application also incorporates multimedia cooking content through reusable au
 * Responsive meal-planning interface.
 * Hover and interactive states for interface elements.
 
-### 🧭 Navigation
+### Navigation
 
 The application uses React Router for client-side navigation and includes a dedicated not-found page for invalid routes.
 
@@ -185,27 +185,27 @@ Screenshots demonstrating the application's main features and responsive design 
 
 ### Home Page
 
-`docs/screenshots/home.png`
+![Home Page Dashboard](./docs/screenshots/home.png)
 
 ### Recipes and Filters
 
-`docs/screenshots/recipes-filter.png`
+![Recipe Search and Filters](./docs/screenshots/recipes-filter.png)
 
 ### Recipe Detail and Video
 
-`docs/screenshots/recipe-detail.png`
+![Recipe Detail & Video Tutorial](./docs/screenshots/recipe-detail.png)
 
 ### Weekly Meal Planner
 
-`docs/screenshots/meal-planner.png`
+![Weekly Meal Planner](./docs/screenshots/meal-planner.png)
 
 ### Favourites
 
-`docs/screenshots/favorites.png`
+![Favorites Collection](./docs/screenshots/favorites.png)
 
 ### Mobile Responsive View
 
-`docs/screenshots/mobile.png`
+![Mobile Responsive View](./docs/screenshots/mobile.png)
 
 ## Future Enhancements
 

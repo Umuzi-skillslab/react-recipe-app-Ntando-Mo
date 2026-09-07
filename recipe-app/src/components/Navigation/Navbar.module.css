@@ -1,9 +1,9 @@
+/* 1. MOBILE FIRST (<768px) */
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /* Exact padding match from your portfolio */
-  padding: 30px 50px;
+  padding: 20px 30px;
   background-color: var(--primary-green);
   color: white;
   position: sticky;
@@ -15,27 +15,48 @@
 .logo a {
   color: white;
   text-decoration: none;
-  /* Exact typography and spacing from your portfolio logo */
   font-size: 1.8rem;
   font-weight: 700;
   letter-spacing: -0.5px;
 }
 
+.hamburger {
+  display: block;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.8rem;
+  cursor: pointer;
+}
+
 .navLinks {
+  display: none;
+  flex-direction: column;
+  /* Centering fixes the stretching underline and improves balance */
+  align-items: center; 
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: var(--primary-green);
+  padding: 25px 0;
+  gap: 25px; /* Creates clean, even vertical spacing */
+  box-shadow: 0 15px 20px rgba(0, 0, 0, 0.2); /* Adds depth below the menu */
+}
+
+.navLinks.open {
   display: flex;
-  align-items: center;
-  /* Exact gap spacing between links from your portfolio */
-  gap: 35px;
 }
 
 .navLinks a {
   color: white;
   text-decoration: none;
   font-weight: 600;
-  font-size: 1rem;
+  font-size: 1.2rem; /* Slightly larger tap targets for mobile */
   transition: color 0.3s ease;
   position: relative;
-  padding-bottom: 1px;
+  padding-bottom: 5px;
+  margin: 0; 
 }
 
 /* The invisible slider line */
@@ -54,52 +75,35 @@
   color: var(--secondary-gold);
 }
 
-/* Animate the line to 100% width on hover */
 .navLinks a:hover::after {
   width: 100%;
 }
 
-/* Active link state keeps the gold text */
 .navLinks a.active {
   color: var(--secondary-gold) !important;
 }
 
-/* Forces the slider to stay open on the active page */
 .navLinks a.active::after {
   width: 100%;
 }
 
-.hamburger {
-  display: none;
-  background: none;
-  border: none;
-  color: white;
-  font-size: 1.8rem;
-  cursor: pointer;
-}
-
-@media (max-width: 768px) {
+/* 2. TABLET & DESKTOP (>768px) */
+@media (min-width: 768px) {
   .navbar {
-    padding: 20px 30px;
+    padding: 30px 50px;
   }
   .hamburger {
-    display: block;
+    display: none;
   }
   .navLinks {
-    display: none;
-    flex-direction: column;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    background-color: var(--primary-green);
-    padding: 1rem 0;
-    gap: 0;
-  }
-  .navLinks.open {
     display: flex;
+    flex-direction: row;
+    position: static;
+    padding: 0;
+    gap: 35px;
+    box-shadow: none; /* Removes mobile shadow */
   }
   .navLinks a {
-    margin: 1rem 2rem;
+    font-size: 1rem; /* Resets to normal size for desktop */
   }
 }

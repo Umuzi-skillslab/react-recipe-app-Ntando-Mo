@@ -1,52 +1,85 @@
-Recipe Discovery & Meal Planning App - Planning Document
+# RecipeHub – Planning Document
 
-1. Component Hierarchy Diagram
-App (Router & FavoritesContext Provider)
-├── common: Navbar, Footer
-└── Pages
-├── Home (AudioPlayer, RecipeList)
-├── RecipesPage (SearchBar, RecipeFilter, Loading, RecipeList)
-│   └── RecipeList
-│       └── RecipeCard (Card, Button)
-├── RecipeDetail (VideoPlayer)
-├── MealPlannerPage (Modal, Button)
-├── FavoritesPage (RecipeList -> RecipeCard)
-└── NotFound (EmptyState)
+## 1. Component Hierarchy
 
-2. Data & Props Flow Diagram
-[FavoritesContext] (State: favorites[], toggleFavorite fn)
-│
-├───> [RecipeList] ──> [RecipeCard] (Consumes context to toggle and check saved status)
-│
-└───> [Navbar] (Consumes context to display favorite count)
+```text
+App
+├── Navbar
+├── Routes
+│   ├── Home
+│   │   └── AudioPlayer
+│   ├── RecipesPage
+│   │   ├── SearchBar
+│   │   ├── RecipeFilter
+│   │   └── RecipeList
+│   │       └── RecipeCard
+│   ├── RecipeDetail
+│   │   └── VideoPlayer
+│   ├── MealPlannerPage
+│   │   └── Meal planner day/meal controls
+│   ├── FavoritesPage
+│   │   └── RecipeCard
+│   └── NotFound
+└── Footer
+```
 
-[RecipesPage] (State: recipes[], filters{}, isLoading, hasError)
-│
-├───(Props: searchTerm, handlers)───> [SearchBar]
-├───(Props: category, cuisine, handlers)───> [RecipeFilter]
-└───(Props: recipes[])───> [RecipeList]
+Reusable UI components used across the application include Button, Card, SearchBar, Loading, and Modal.
 
-[MealPlannerPage] (State: planner{}, isModalOpen)
-│
-└───(Syncs planner state directly with localStorage via useEffect)
+## 2. Data Flow
 
-3. Component List & Purposes
+```text
+recipesData.js
+      │
+      ▼
+RecipesPage ── search/filter state ──► RecipeList
+      │                                  │
+      │                                  ▼
+      │                              RecipeCard
+      │                                  │
+      │                         favorite callback
+      │                                  ▼
+      │                         FavoritesContext
+      │                                  │
+      ▼                                  ▼
+RecipeDetail ◄── recipe ID ─────── FavoritesPage
 
-App / Pages: App serves as the root router and wraps the application in the FavoritesContext. Route-level components (Home, RecipesPage, MealPlannerPage, FavoritesPage, RecipeDetail, NotFound) isolate specific views.
+MealPlannerPage
+      │
+      ├── meal plan state
+      └── localStorage
+             │
+             ▼
+       Planned meals
 
-Navbar / Footer: Manages global navigation and active route highlighting.
+App
+ ├── routing
+ ├── Navbar
+ └── shared FavoritesContext
+```
 
-UI Components: Button, Card, SearchBar, Modal, Loading, and EmptyState act as highly reusable, presentation-only elements utilizing the children prop for a consistent design system.
+Recipe information flows from the recipe dataset into page components and then into reusable child components through props. User actions such as favoriting and meal planning update state through callback functions and context.
 
-Recipe Elements: RecipeList, RecipeCard, and RecipeFilter map arrays of data and handle complex filtering logic.
+## 3. Components and Purposes
 
-Planner Elements: MealPlannerPage constructs the 7-day layout and individual breakfast, lunch, and dinner dropdown slots directly within the page.
+* **Navbar** – Provides responsive navigation and active route styling.
+* **Footer** – Displays shared footer content.
+* **Home** – Landing page with featured content and cooking audio.
+* **RecipesPage** – Manages recipe loading, searching, and filtering.
+* **RecipeList** – Renders the filtered recipe collection.
+* **RecipeCard** – Displays recipe summaries and favorite actions.
+* **RecipeDetail** – Displays complete recipe information and tutorial media.
+* **RecipeFilter** – Provides category, cuisine, and difficulty filters.
+* **MealPlannerPage** – Manages the weekly meal plan.
+* **FavoritesPage** – Displays saved recipes.
+* **NotFound** – Handles invalid routes.
+* **AudioPlayer** – Provides HTML5 audio controls.
+* **VideoPlayer** – Provides HTML5 video controls.
+* **Button, Card, SearchBar, Loading, Modal** – Reusable interface components.
 
-Media Elements: VideoPlayer and AudioPlayer provide HTML5 multimedia wrapping for tutorials and tips.
+## 4. Props Flow
 
-4. State Management Strategy
-Global state for saved recipes is managed using the Context API (FavoritesContext). This eliminates prop drilling and allows seamless sibling communication (e.g., clicking the save button in RecipeCard instantly updates the favorites count inside the Navbar).
+RecipeList receives recipe data and favorite-related handlers, then passes recipe information, favorite status, and callbacks to RecipeCard. SearchBar receives the search value and change handler from RecipesPage. RecipeFilter receives filter values, change handlers, and the clear-filters handler. Reusable Button and Card components receive styling, content, and children through props. Media components receive their media URL and title through props.
 
-The MealPlannerPage manages its own complex 3-slot daily schedule locally. It utilizes the useEffect hook to instantly synchronize any mutations with localStorage for browser persistence.
+## 5. State Management Strategy
 
-Local UI state (search queries, dropdown filters, loading states, and error handling) remains tightly scoped within parent components like RecipesPage to prevent unnecessary app-wide re-renders. Data fetching is simulated locally using setTimeout within a useEffect hook to demonstrate asynchronous state transitions.
+Local `useState` manages recipe search/filter values, loading/error states, recipe data, and meal-planning interactions. `useEffect` handles recipe loading and localStorage persistence. Favorites are managed through FavoritesContext so multiple pages can access the same state without unnecessary prop drilling. The meal planner uses object state containing breakfast, lunch, and dinner for each day and persists the plan in localStorage.

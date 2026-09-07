@@ -13,7 +13,7 @@ const Navbar = () => {
       <div className={styles.logo}>
         <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: '8px', textDecoration: 'none', color: 'inherit' }}>
           <img src="/recipehub-logo.svg" alt="RecipeHub Logo" style={{ width: '32px', height: '32px' }} />
-          RecipeHub
+          FlavourFlow
         </Link>
       </div>
       

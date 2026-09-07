@@ -41,3 +41,46 @@
   justify-content: space-between;
   align-items: center;
 }
+
+/* Default Unsaved State */
+.btnSave {
+  background-color: transparent;
+  border: 2px solid #e74c3c;
+  color: #e74c3c;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+}
+
+.btnSave:hover {
+  background-color: rgba(231, 76, 60, 0.1);
+}
+
+/* Active Saved State */
+.btnSaved {
+  background-color: #e74c3c;
+  border: 2px solid #e74c3c;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+}
+
+.btnSaved:hover {
+  background-color: #c0392b;
+  border-color: #c0392b;
+}
+
+.icon {
+  font-size: 1.1rem;
+}

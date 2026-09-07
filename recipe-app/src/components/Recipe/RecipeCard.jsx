@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Button from '../UI/Button';
 import Card from '../UI/Card';
+import styles from './RecipeCard.module.css';
 
 const RecipeCard = ({ recipe, onFavorite, isSaved }) => {
   const handleSaveClick = (e) => {
@@ -32,12 +33,13 @@ const RecipeCard = ({ recipe, onFavorite, isSaved }) => {
             <Button variant="primary">View</Button>
           </Link>
           
-          <Button 
-            variant={isSaved ? "danger" : "secondary"} 
+          <button 
+            className={isSaved ? styles.btnSaved : styles.btnSave} 
             onClick={handleSaveClick}
           >
-            ❤️ Save
-          </Button>
+            <span className={styles.icon}>{isSaved ? '♥' : '♡'}</span>
+            {isSaved ? 'Saved' : 'Save'}
+          </button>
         </div>
       </div>
     </Card>

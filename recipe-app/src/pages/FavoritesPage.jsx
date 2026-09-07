@@ -1,21 +1,36 @@
-import { useContext } from 'react';
-import { FavoritesContext } from '../context/FavoritesContext';
-import RecipeList from '../components/Recipe/RecipeList';
+import { useContext } from "react";
+import { Link } from "react-router-dom";
+import { FavoritesContext } from "../context/FavoritesContext";
+import RecipeList from "../components/Recipe/RecipeList";
+import Button from "../components/UI/Button";
+import styles from "./FavoritesPage.module.css";
 
 const FavoritesPage = () => {
   const { favorites } = useContext(FavoritesContext);
 
   return (
-    <div>
-      <div style={{ marginBottom: '2rem' }}>
-        <h1>My Favorites</h1>
-        <p>Your personal collection of saved recipes.</p>
-      </div>
+    <div className={styles.page}>
+      <header className={styles.header}>
+        <span className={styles.eyebrow}>Your Collection</span>
+        <h1>My Favourites</h1>
+        <p>
+          Keep your favourite recipes close and build your personal
+          collection of dishes worth making again.
+        </p>
+      </header>
 
       {favorites.length === 0 ? (
-        <div style={{ textAlign: 'center', padding: '3rem', backgroundColor: 'var(--white)', borderRadius: '12px', boxShadow: '0 10px 30px rgba(0, 0, 0, 0.03)' }}>
-          <h3>No favorites yet!</h3>
-          <p>Go to the Recipes page and click "Save" on a few meals to see them here.</p>
+        <div className={styles.emptyState}>
+          <span className={styles.icon}>♡</span>
+          <h2>Your collection is empty</h2>
+          <p>
+            Explore our recipes and save the dishes you love. They'll
+            appear here whenever you need inspiration.
+          </p>
+
+          <Link to="/recipes">
+            <Button variant="primary">Explore Recipes</Button>
+          </Link>
         </div>
       ) : (
         <RecipeList recipes={favorites} />

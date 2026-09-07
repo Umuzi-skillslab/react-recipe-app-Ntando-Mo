@@ -33,7 +33,7 @@ const Home = () => {
       />
 
       {/* Audio Player checks off the multimedia requirement */}
-      <section style={{ maxWidth: '1200px', margin: '40px auto 0', padding: '0 20px' }}>
+      <section className={styles.audioSection}>
         <AudioPlayer 
           title="Daily Cooking Tip: Perfecting Knife Skills" 
           audioUrl="/assets/audio/cooking-tip.mp3" 

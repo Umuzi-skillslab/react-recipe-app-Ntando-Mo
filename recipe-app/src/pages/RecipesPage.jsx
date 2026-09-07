@@ -4,20 +4,18 @@ import RecipeList from "../components/Recipe/RecipeList";
 import RecipeFilter from "../components/Recipe/RecipeFilter";
 import SearchBar from "../components/UI/SearchBar";
 import Loading from "../components/UI/Loading";
+import styles from "./RecipesPage.module.css";
 
 const RecipesPage = () => {
-  // Initialize simple state variables for search and filtering requirements
   const [searchQuery, setSearchQuery] = useState("");
   const [category, setCategory] = useState("all");
   const [cuisine, setCuisine] = useState("all");
   const [difficulty, setDifficulty] = useState("all");
 
-  // State for conditional rendering requirements and data fetch simulation
   const [isLoading, setIsLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
   const [recipes, setRecipes] = useState([]);
 
-  // Simulating a data fetch to hit the useEffect and Loading state requirements
   useEffect(() => {
     const fetchRecipes = setTimeout(() => {
       try {
@@ -33,7 +31,6 @@ const RecipesPage = () => {
     return () => clearTimeout(fetchRecipes);
   }, []);
 
-  // Event handler to clear all active filters and reset to default states
   const handleClearFilters = () => {
     setSearchQuery("");
     setCategory("all");
@@ -41,25 +38,29 @@ const RecipesPage = () => {
     setDifficulty("all");
   };
 
-  // Filter recipes array dynamically based on all selected state conditions
   const filteredRecipes = recipes.filter((recipe) => {
     const lowerQuery = searchQuery.toLowerCase();
 
-    // Checks if the keyword is in the title OR inside any of the ingredients
     const matchesSearch =
       recipe.title.toLowerCase().includes(lowerQuery) ||
       recipe.ingredients.some((ingredient) =>
         ingredient.toLowerCase().includes(lowerQuery),
       );
 
-    const matchesCategory = category === "all" || recipe.category === category;
-    const matchesCuisine = cuisine === "all" || recipe.cuisine === cuisine;
+    const matchesCategory =
+      category === "all" || recipe.category === category;
+
+    const matchesCuisine =
+      cuisine === "all" || recipe.cuisine === cuisine;
+
     const matchesDifficulty =
       difficulty === "all" || recipe.difficulty === difficulty;
 
-    // Only return true if the recipe passes every single active filter
     return (
-      matchesSearch && matchesCategory && matchesCuisine && matchesDifficulty
+      matchesSearch &&
+      matchesCategory &&
+      matchesCuisine &&
+      matchesDifficulty
     );
   });
 
@@ -69,13 +70,15 @@ const RecipesPage = () => {
 
   if (hasError) {
     return (
-      <div
-        style={{ textAlign: "center", padding: "100px 20px", color: "#d9534f" }}
-      >
-        <h2>⚠️ Failed to load recipes.</h2>
+      <div className={styles.errorState}>
+        <span className={styles.errorIcon}>⚠️</span>
+        <h2>Something went wrong</h2>
+        <p>We couldn't load the recipes. Please try again.</p>
+
         <button
+          type="button"
+          className={styles.retryButton}
           onClick={() => window.location.reload()}
-          style={{ padding: "10px 20px", cursor: "pointer" }}
         >
           Try Again
         </button>
@@ -84,42 +87,81 @@ const RecipesPage = () => {
   }
 
   return (
-    // Inline styles used here to fulfill the specific styling rubric requirement
-    <div style={{ padding: "40px 20px", maxWidth: "1200px", margin: "0 auto" }}>
-      <h1>All Recipes</h1>
-      <p style={{ marginBottom: "30px" }}>Discover your next favorite meal.</p>
+    <div className={styles.page}>
+      <header className={styles.pageHeader}>
+        <span className={styles.eyebrow}>The Recipe Collection</span>
+        <h1>Find Your Next Favourite</h1>
+        <p>
+          Explore delicious recipes, discover new flavours, and find
+          something perfect for your next meal.
+        </p>
+      </header>
 
-      {/* Passing state and handlers as props to the SearchBar child component */}
-      <SearchBar
-        searchTerm={searchQuery}
-        onSearchChange={(e) => setSearchQuery(e.target.value)}
-        onSearchSubmit={(e) => e.preventDefault()}
-      />
+      <section className={styles.searchSection}>
+        <div className={styles.searchHeader}>
+          <div>
+            <h2>What are you craving?</h2>
+            <p>Search by recipe name or ingredient.</p>
+          </div>
 
-      {/* RecipeFilter receives multiple state updater functions via props */}
-      <RecipeFilter
-        category={category}
-        setCategory={setCategory}
-        cuisine={cuisine}
-        setCuisine={setCuisine}
-        difficulty={difficulty}
-        setDifficulty={setDifficulty}
-        onClear={handleClearFilters}
-      />
+          <span className={styles.resultCount}>
+            {filteredRecipes.length} recipes
+          </span>
+        </div>
 
-      {filteredRecipes.length > 0 && <RecipeList recipes={filteredRecipes} />}
+        <SearchBar
+          searchTerm={searchQuery}
+          onSearchChange={(e) => setSearchQuery(e.target.value)}
+          onSearchSubmit={(e) => e.preventDefault()}
+        />
+      </section>
+
+      <section className={styles.filterSection}>
+        <div className={styles.filterHeading}>
+          <div>
+            <h2>Refine Your Search</h2>
+            <p>Filter by category, cuisine, or difficulty.</p>
+          </div>
+        </div>
+
+        <RecipeFilter
+          category={category}
+          setCategory={setCategory}
+          cuisine={cuisine}
+          setCuisine={setCuisine}
+          difficulty={difficulty}
+          setDifficulty={setDifficulty}
+          onClear={handleClearFilters}
+        />
+      </section>
+
+      {filteredRecipes.length > 0 && (
+        <section className={styles.resultsSection}>
+          <div className={styles.resultsHeading}>
+            <h2>Recipes</h2>
+            <span>{filteredRecipes.length} found</span>
+          </div>
+
+          <RecipeList recipes={filteredRecipes} />
+        </section>
+      )}
 
       {filteredRecipes.length === 0 && (
-        <p
-          style={{
-            textAlign: "center",
-            marginTop: "3rem",
-            fontSize: "1.2rem",
-            color: "#555",
-          }}
-        >
-          No recipes found matching your exact filters. Try clearing them!
-        </p>
+        <div className={styles.emptyState}>
+          <span className={styles.emptyIcon}>🍽️</span>
+          <h2>No recipes found</h2>
+          <p>
+            Try adjusting your search or clearing some of your filters.
+          </p>
+
+          <button
+            type="button"
+            className={styles.retryButton}
+            onClick={handleClearFilters}
+          >
+            Clear Filters
+          </button>
+        </div>
       )}
     </div>
   );

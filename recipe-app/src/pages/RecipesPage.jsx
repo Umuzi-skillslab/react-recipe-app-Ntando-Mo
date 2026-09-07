@@ -24,6 +24,7 @@ const RecipesPage = () => {
         setRecipes(recipesData);
         setIsLoading(false);
       } catch (error) {
+        console.error(error);
         setHasError(true);
         setIsLoading(false);
       }

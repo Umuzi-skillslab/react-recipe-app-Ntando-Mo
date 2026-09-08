@@ -8,12 +8,14 @@ import MealPlannerPage from './pages/MealPlannerPage';
 import FavoritesPage from './pages/FavoritesPage';
 import NotFound from './pages/NotFound';
 import RecipeDetail from './components/Recipe/RecipeDetail';
+import ScrollToTop from './components/common/ScrollToTop';
 import './App.css';
 
 function App() {
   return (
     <FavoritesProvider>
       <BrowserRouter>
+        <ScrollToTop />
         <div className="app-wrapper">
           <Navbar />
           <main className="main-content">

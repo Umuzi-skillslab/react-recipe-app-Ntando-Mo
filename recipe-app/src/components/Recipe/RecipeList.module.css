@@ -1,0 +1,25 @@
+/* 1. MOBILE FIRST (<768px) */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  padding: 16px 0;
+  justify-content: center;
+}
+
+/* 2. TABLET (768px - 1024px) */
+@media (min-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+  }
+}
+
+/* 3. DESKTOP (>1024px) */
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+    padding: 20px 0;
+  }
+}

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Dark Green Background -->
+  <circle cx="50" cy="50" r="50" fill="#1f3d2b" />
+  <!-- Gold Serving Cloche (Dome) -->
+  <path d="M50 25 C30 25 15 45 15 65 L85 65 C85 45 70 25 50 25 Z" fill="#c2a878" />
+  <!-- Gold Plate Base -->
+  <rect x="10" y="68" width="80" height="6" rx="3" fill="#c2a878" />
+  <!-- Gold Top Handle -->
+  <circle cx="50" cy="18" r="6" fill="#c2a878" />
+</svg>

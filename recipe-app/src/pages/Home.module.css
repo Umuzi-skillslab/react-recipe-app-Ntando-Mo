@@ -1,0 +1,138 @@
+.hero {
+  width: 100%;
+  max-width: 850px;
+  margin: 0 auto;
+  padding: 60px 20px 45px;
+  text-align: center;
+}
+
+.heroTag {
+  display: inline-block;
+  margin-bottom: 16px;
+  color: var(--secondary-gold);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.heroTitle {
+  margin-bottom: 20px;
+  color: var(--primary-green);
+  font-size: var(--step-4);
+  line-height: 1.1;
+  letter-spacing: -1px;
+}
+
+.heroSubtitle {
+  max-width: 700px;
+  margin: 0 auto 32px;
+  color: #555;
+  font-size: var(--step-0);
+  line-height: 1.7;
+}
+
+.heroActions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.heroActions a {
+  display: inline-flex;
+  text-decoration: none;
+}
+
+/*
+  The first action is the primary call-to-action.
+  The second action remains available without competing
+  visually with the main action.
+*/
+.heroActions a:last-child button {
+  opacity: 0.9;
+}
+
+.heroBanner {
+  width: 100%;
+  height: 450px;
+  display: block;
+  object-fit: cover;
+  border-radius: 16px;
+  margin-bottom: 70px;
+  box-shadow: 0 20px 40px rgba(31, 61, 43, 0.15);
+}
+
+.sectionTitle {
+  max-width: 700px;
+  margin: 0 auto 40px;
+  text-align: center;
+}
+
+.sectionTitle p {
+  margin: 8px 0 0;
+  color: #666;
+}
+
+/* Tablet: 768px–1024px */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .hero {
+    max-width: 760px;
+    padding-top: 50px;
+  }
+
+  .heroBanner {
+    height: 380px;
+  }
+}
+
+/* Mobile: below 768px */
+@media (max-width: 767px) {
+  .hero {
+    padding: 40px 15px 35px;
+  }
+
+  .heroTitle {
+    font-size: clamp(2.2rem, 9vw, 3rem);
+  }
+
+  .heroSubtitle {
+    font-size: 0.95rem;
+  }
+
+  .heroActions {
+    width: 100%;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .heroActions a {
+    width: min(100%, 280px);
+  }
+
+  .heroActions a button {
+    width: 100%;
+  }
+
+  .heroBanner {
+    height: 280px;
+    margin-bottom: 50px;
+    border-radius: 12px;
+  }
+
+  .sectionTitle {
+    margin-bottom: 30px;
+  }
+}
+
+/* Desktop: above 1024px */
+@media (min-width: 1025px) {
+  .heroActions a:first-child button {
+    min-width: 170px;
+  }
+
+  .heroActions a:last-child button {
+    min-width: 145px;
+  }
+}

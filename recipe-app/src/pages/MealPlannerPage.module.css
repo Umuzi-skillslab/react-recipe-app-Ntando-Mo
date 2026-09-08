@@ -1,0 +1,135 @@
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px 0 60px;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 35px;
+}
+
+.header p {
+  color: #666;
+  margin: 8px 0 0;
+}
+
+.headerActions {
+  margin-top: 20px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.dayCard {
+  background-color: var(--white);
+  padding: 22px;
+  border-radius: 14px;
+  box-shadow: 0 10px 30px rgba(31, 61, 43, 0.05);
+  border-top: 4px solid var(--primary-green);
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.dayCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 35px rgba(31, 61, 43, 0.1);
+}
+
+.dayTitle {
+  font-size: 1.25rem;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid rgba(194, 168, 120, 0.25);
+}
+
+.mealSlot {
+  margin-bottom: 20px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid #eee;
+}
+
+.mealSlot:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.slotTitle {
+  margin: 0 0 10px;
+  color: var(--primary-green);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.select {
+  width: 100%;
+  padding: 11px 12px;
+  border: 1px solid #ddd;
+  border-radius: 7px;
+  font-family: inherit;
+  font-size: 0.85rem;
+  background-color: var(--bg-light);
+  color: var(--text-dark);
+  cursor: pointer;
+}
+
+.select:focus {
+  outline: none;
+  border-color: var(--primary-green);
+  box-shadow: 0 0 0 3px rgba(31, 61, 43, 0.08);
+}
+
+.mealInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.mealTitle {
+  font-weight: 700;
+  color: #333;
+  line-height: 1.4;
+}
+
+.mealMeta {
+  color: #777;
+  font-size: 0.8rem;
+}
+
+/* Tablet: 768px–1024px */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .container {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+  }
+} /* Mobile: below 768px */
+@media (max-width: 767px) {
+  .container {
+    padding: 15px 0 45px;
+  }
+  .header {
+    margin-bottom: 25px;
+  }
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+  .dayCard {
+    padding: 20px;
+  }
+} /* Desktop: above 1024px */
+@media (min-width: 1025px) {
+  .grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}

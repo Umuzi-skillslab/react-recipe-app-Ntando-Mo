@@ -1,0 +1,85 @@
+# RecipeHub – Planning Document
+
+## 1. Component Hierarchy
+
+```text
+App
+├── Navbar
+├── Routes
+│   ├── Home
+│   │   └── AudioPlayer
+│   ├── RecipesPage
+│   │   ├── SearchBar
+│   │   ├── RecipeFilter
+│   │   └── RecipeList
+│   │       └── RecipeCard
+│   ├── RecipeDetail
+│   │   └── VideoPlayer
+│   ├── MealPlannerPage
+│   │   └── Meal planner day/meal controls
+│   ├── FavoritesPage
+│   │   └── RecipeCard
+│   └── NotFound
+└── Footer
+```
+
+Reusable UI components used across the application include Button, Card, SearchBar, Loading, and Modal.
+
+## 2. Data Flow
+
+```text
+recipesData.js
+      │
+      ▼
+RecipesPage ── search/filter state ──► RecipeList
+      │                                  │
+      │                                  ▼
+      │                              RecipeCard
+      │                                  │
+      │                         favorite callback
+      │                                  ▼
+      │                         FavoritesContext
+      │                                  │
+      ▼                                  ▼
+RecipeDetail ◄── recipe ID ─────── FavoritesPage
+
+MealPlannerPage
+      │
+      ├── meal plan state
+      └── localStorage
+             │
+             ▼
+       Planned meals
+
+App
+ ├── routing
+ ├── Navbar
+ └── shared FavoritesContext
+```
+
+Recipe information flows from the recipe dataset into page components and then into reusable child components through props. User actions such as favoriting and meal planning update state through callback functions and context.
+
+## 3. Components and Purposes
+
+* **Navbar** – Provides responsive navigation and active route styling.
+* **Footer** – Displays shared footer content.
+* **Home** – Landing page with featured content and cooking audio.
+* **RecipesPage** – Manages recipe loading, searching, and filtering.
+* **RecipeList** – Renders the filtered recipe collection.
+* **RecipeCard** – Displays recipe summaries and favorite actions.
+* **RecipeDetail** – Displays complete recipe information and tutorial media.
+* **RecipeFilter** – Provides category, cuisine, and difficulty filters.
+* **MealPlannerPage** – Manages the weekly meal plan.
+* **FavoritesPage** – Displays saved recipes.
+* **NotFound** – Handles invalid routes.
+* **AudioPlayer** – Provides HTML5 audio controls.
+* **VideoPlayer** – Provides HTML5 video controls.
+* **Button, Card, SearchBar, Loading, Modal** – Reusable interface components.
+
+## 4. Props Flow
+
+RecipeList receives recipe data and favorite-related handlers, then passes recipe information, favorite status, and callbacks to RecipeCard. SearchBar receives the search value and change handler from RecipesPage. RecipeFilter receives filter values, change handlers, and the clear-filters handler. Reusable Button and Card components receive styling, content, and children through props. Media components receive their media URL and title through props.
+
+## 5. State Management Strategy
+
+Local `useState` manages recipe search/filter values, loading/error states, recipe data, and meal-planning interactions. `useEffect` handles recipe loading and localStorage persistence. Favorites are managed through FavoritesContext so multiple pages can access the same state without unnecessary prop drilling. The meal planner uses object state containing breakfast, lunch, and dinner for each day and persists the plan in localStorage.

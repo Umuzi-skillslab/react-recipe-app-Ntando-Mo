@@ -1,0 +1,109 @@
+/* 1. MOBILE FIRST (<768px) */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 30px;
+  background-color: var(--primary-green);
+  color: white;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-bottom: 4px solid var(--secondary-gold);
+}
+
+.logo a {
+  color: white;
+  text-decoration: none;
+  font-size: 1.8rem;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+.hamburger {
+  display: block;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.8rem;
+  cursor: pointer;
+}
+
+.navLinks {
+  display: none;
+  flex-direction: column;
+  /* Centering fixes the stretching underline and improves balance */
+  align-items: center; 
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: var(--primary-green);
+  padding: 25px 0;
+  gap: 25px; /* Creates clean, even vertical spacing */
+  box-shadow: 0 15px 20px rgba(0, 0, 0, 0.2); /* Adds depth below the menu */
+}
+
+.navLinks.open {
+  display: flex;
+}
+
+.navLinks a {
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.2rem; /* Slightly larger tap targets for mobile */
+  transition: color 0.3s ease;
+  position: relative;
+  padding-bottom: 5px;
+  margin: 0; 
+}
+
+/* The invisible slider line */
+.navLinks a::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 3px;
+  bottom: 0;
+  left: 0;
+  background-color: var(--secondary-gold);
+  transition: width 0.3s ease;
+}
+
+.navLinks a:hover {
+  color: var(--secondary-gold);
+}
+
+.navLinks a:hover::after {
+  width: 100%;
+}
+
+.navLinks a.active {
+  color: var(--secondary-gold) !important;
+}
+
+.navLinks a.active::after {
+  width: 100%;
+}
+
+/* 2. TABLET & DESKTOP (>768px) */
+@media (min-width: 768px) {
+  .navbar {
+    padding: 30px 50px;
+  }
+  .hamburger {
+    display: none;
+  }
+  .navLinks {
+    display: flex;
+    flex-direction: row;
+    position: static;
+    padding: 0;
+    gap: 35px;
+    box-shadow: none; /* Removes mobile shadow */
+  }
+  .navLinks a {
+    font-size: 1rem; /* Resets to normal size for desktop */
+  }
+}
